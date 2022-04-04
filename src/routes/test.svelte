@@ -1,5 +1,5 @@
 <script>
-	import * as d3 from 'd3';
+	// import * as d3 from 'd3';
 	import { onMount } from 'svelte';
 
 	let headerText;
@@ -177,27 +177,27 @@
 		let Plot = new Plotly.newPlot(plotDiv, [data_json], {}, { showSendToCloud: true });
 	});
 
-	var x_min = 0;
-	var x_max = 0;
-	var y_min = 0;
-	var y_max = 0;
-	data.forEach((d) => {
-		x_min = d[0] < x_min ? d[0] : x_min;
-		x_max = d[0] > x_max ? d[0] : x_max;
-		y_min = d[1] < y_min ? d[1] : y_min;
-		y_max = d[1] > y_max ? d[1] : y_max;
-	});
+	// var x_min = 0;
+	// var x_max = 0;
+	// var y_min = 0;
+	// var y_max = 0;
+	// data.forEach((d) => {
+	// 	x_min = d[0] < x_min ? d[0] : x_min;
+	// 	x_max = d[0] > x_max ? d[0] : x_max;
+	// 	y_min = d[1] < y_min ? d[1] : y_min;
+	// 	y_max = d[1] > y_max ? d[1] : y_max;
+	// });
 
-	let width = 500;
-	let height = 300;
-	let x = d3
-		.scaleLinear()
-		.domain([x_min, x_max]) // unit: km
-		.range([0, width]); // unit: pixels
-	let y = d3
-		.scaleLinear()
-		.domain([y_min, y_max]) // unit: km
-		.range([0, height]); // unit: pixels
+	// let width = 500;
+	// let height = 300;
+	// let x = d3
+	// 	.scaleLinear()
+	// 	.domain([x_min, x_max]) // unit: km
+	// 	.range([0, width]); // unit: pixels
+	// let y = d3
+	// 	.scaleLinear()
+	// 	.domain([y_min, y_max]) // unit: km
+	// 	.range([0, height]); // unit: pixels
 </script>
 
 <svelte:head>
@@ -207,13 +207,14 @@
 <!-- <button on:click={click}>submit</button> -->
 
 <h1>Hello {name}</h1>
-<div id="a1">
+
+<!-- <div id="a1">
 	<svg width="500" height="300" style="border:1px solid black">
 		{#each data as i}
 			<circle cx={x(i[0])} cy={y(i[1])} r="5" fill="red" />
 		{/each}
 	</svg>
-</div>
+</div> -->
 
 <h3>{headerText}</h3>
 <div id="plotly">
