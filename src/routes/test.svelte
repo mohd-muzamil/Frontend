@@ -1,5 +1,9 @@
 <script>
 	import * as d3 from 'd3';
+	import { onMount } from 'svelte';
+
+	let headerText;
+
 	let name = '';
 	// 	let data =[
 	// 		[0, 0],
@@ -160,11 +164,23 @@
 		[5.9, 3, 5.1, 1.8, 'Virginica']
 	];
 
+	let data_json = {};
+	data_json.x = data.slice(1).map((d) => d[0]);
+	data_json.y = data.slice(1).map((d) => d[1]);
+	data_json.mode = 'markers';
+	data_json.type = 'scatter';
+	console.log(data_json);
+
+	onMount(() => {
+		headerText = 'On Mount Called !';
+		let plotDiv = document.getElementById('plotDiv');
+		let Plot = new Plotly.newPlot(plotDiv, [data_json], {}, { showSendToCloud: true });
+	});
+
 	var x_min = 0;
 	var x_max = 0;
 	var y_min = 0;
 	var y_max = 0;
-
 	data.forEach((d) => {
 		x_min = d[0] < x_min ? d[0] : x_min;
 		x_max = d[0] > x_max ? d[0] : x_max;
@@ -184,6 +200,9 @@
 		.range([0, height]); // unit: pixels
 </script>
 
+<svelte:head>
+	<script src="https://cdn.plot.ly/plotly-latest.min.js" type="text/javascript"></script>
+</svelte:head>
 <input id="name" placeholder="Enter your Name" bind:value={name} />
 <!-- <button on:click={click}>submit</button> -->
 
@@ -194,6 +213,14 @@
 			<circle cx={x(i[0])} cy={y(i[1])} r="5" fill="red" />
 		{/each}
 	</svg>
+</div>
+
+<h3>{headerText}</h3>
+<div id="plotly">
+	<div>
+		<h3>Iris scatter plot</h3>
+	</div>
+	<div id="plotDiv"><!-- Plotly chart will be drawn inside this DIV --></div>
 </div>
 
 <style>
